@@ -1,8 +1,10 @@
-# Ignore everything in the data directory
+# Ignore everything in the data and checkpoints directories
 data/*
+comfyui/models/checkpoints/*
 
-# But don't ignore the data directory itself
+# But don't ignore the directories themselves
 !data/.gitkeep
+!comfyui/models/checkpoints/.gitkeep
 
 # Common Python files
 __pycache__/

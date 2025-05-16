@@ -15,6 +15,21 @@ This project is a community effort to containerize the LTX-Video project. This i
 - **ComfyUI**: Latest from GitHub repository
 - **ComfyUI-LTXVideo**: Latest from GitHub repository
 
+## 📂 Model Placement
+
+To use the LTX-Video model in ComfyUI, place your downloaded model files in the following directory:
+
+```
+comfyui/models/checkpoints/
+```
+
+For example, if you've downloaded `v1-5-pruned-emaonly-fp16.safetensors`, place it in:
+```
+comfyui/models/checkpoints/v1-5-pruned-emaonly-fp16.safetensors
+```
+
+> **Note**: The `checkpoints` directory is excluded from version control by default to keep the repository size manageable.
+
 ## 🙏 Acknowledgments
 
 - Huge thanks to the team at [Lightricks](https://lightricks.com/) for their amazing work on [LTX-Video](https://github.com/Lightricks/LTX-Video).
