@@ -9,7 +9,8 @@ COMFYUI_PORT=8188
 # Create local data directories if they don't exist
 mkdir -p "${LOCAL_DATA_DIR}/input"
 mkdir -p "${LOCAL_DATA_DIR}/output"
-mkdir -p "${LOCAL_DATA_DIR}/comfyui"
+mkdir -p "${LOCAL_DATA_DIR}/comfyui/models/checkpoints"
+mkdir -p "${LOCAL_DATA_DIR}/comfyui/custom_nodes"
 
 # Function to build the Docker image
 build_image() {
@@ -33,6 +34,8 @@ run_cli() {
         --name "${CONTAINER_NAME}" \
         -v "${LOCAL_DATA_DIR}/input:/data/input" \
         -v "${LOCAL_DATA_DIR}/output:/data/output" \
+        -v "${LOCAL_DATA_DIR}/comfyui/models/checkpoints:/comfyui/models/checkpoints" \
+        -v "${LOCAL_DATA_DIR}/comfyui/custom_nodes:/comfyui/custom_nodes" \
         "${IMAGE_NAME}" \
         /bin/bash -c "echo 'Starting LTX-Video CLI...' && exec /bin/bash"
 }
@@ -54,9 +57,10 @@ run_comfyui() {
         -p ${COMFYUI_PORT}:8188 \
         -v "${LOCAL_DATA_DIR}/input:/data/input" \
         -v "${LOCAL_DATA_DIR}/output:/data/output" \
-        -v "${LOCAL_DATA_DIR}/comfyui:/comfyui/models" \
+        -v "${LOCAL_DATA_DIR}/comfyui/models/checkpoints:/comfyui/models/checkpoints" \
+        -v "${LOCAL_DATA_DIR}/comfyui/custom_nodes:/comfyui/custom_nodes" \
         "${IMAGE_NAME}" \
-        /usr/local/bin/start-comfyui.sh
+        /bin/bash /usr/local/bin/start-comfyui.sh
     
     echo ""
     echo "ComfyUI is now running at: http://localhost:${COMFYUI_PORT}"
